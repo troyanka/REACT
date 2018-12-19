@@ -13,7 +13,7 @@ export default class CountriesService{
     searchCapital(capital, countries){
         return countries.find( country => {
             if(country.capital){
-                return country.capital.toLowerCase() === capital;
+                return country.capital.toLowerCase() === capital.toLowerCase();
             }
         } );
     }
