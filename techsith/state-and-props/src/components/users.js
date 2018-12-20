@@ -13,12 +13,9 @@ class Users extends Component {
 
       handleClick = () =>{
          let {users} = this.state;
-         users.map(user =>{
-            console.log(user.age);
-            user.age -= 10;
-         });
-         this.setState({users});
-         console.log(users);  
+         users.map(user => user.age -= 10 );
+         //SetStae is asyncronios process
+         this.setState({users}); 
       }
 
     render() { 
@@ -27,9 +24,11 @@ class Users extends Component {
                     <button onClick={this.handleClick}>Make Us 10 years Younger</button>
                     <br/>
                     <h1>{this.state.title}</h1>
-                    <User age={this.state.users[0].age}>{this.state.users[0].name}</User>
-                    <User age={this.state.users[1].age}>{this.state.users[1].name}</User>
-                    <User age={this.state.users[2].age}>{this.state.users[2].name}</User>
+                    {
+                        this.state.users.map((user, index)=>{
+                            return <User key={index} age={user.age}>{user.name}</User>
+                        })
+                    }
                 </div>
         );
     }
