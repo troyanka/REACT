@@ -1,14 +1,23 @@
 import React, { Component, Fragment } from 'react';
+import {products} from '../services/products.service';
+
+// 45 minute
 
 class App extends Component {
     state = {
         total: 1,
         showAmount: false,
-        products: [
-            { id: 2, title: 'Product1', article: 'Text prod1', price: 45 },
-            { id: 7, title: 'Product2', article: 'Text prod2', price: 25 },
-            { id: 6, title: 'Product3', article: 'Text prod3', price: 35 }
-        ]
+        products: []
+    }
+
+    componentDidMount(){
+        let myProducts = [...products];
+        myProducts.map( product =>{
+            product.showAmount = false;
+            product.total = 1;
+            return product;
+        });
+        this.setState({products:myProducts});
     }
 
     handleChange() { };
@@ -25,7 +34,13 @@ class App extends Component {
         this.setState({ total });
     }
 
-    handleShow = () => {
+    handleShow = (id) => {
+        let { products } = this.state;
+
+        products.map(product=>{
+            product.showAmount = !product.showAmount;
+        });
+
         let { showAmount } = this.state;
         showAmount = !showAmount;
         this.setState({ showAmount });
@@ -33,7 +48,7 @@ class App extends Component {
 
     render() {
 
-        let { showAmount, total, products } = this.state;
+        let { products } = this.state;
 
         return (
             <Fragment>
@@ -47,11 +62,11 @@ class App extends Component {
                                     </div>
                                     <div className="card-body">
                                         <p> {product.article} </p>
-                                        <p><input onClick={this.handleShow} className="btn btn-primary" type="button" value="Buy" /></p>
-                                        {showAmount &&
+                                        <p><input onClick={()=>this.handleShow(product.id)} className="btn btn-primary" type="button" value="Buy" /></p>
+                                        {product.showAmount &&
                                             <div className="amount">
                                                 <input className="btn btn-success mr-2" type="button" onClick={this.handleClick} value="-"></input>
-                                                <input type="text" onChange={this.handleChange} value={total} size="1" style={{ textAlign: 'center' }}></input>
+                                                <input type="text" onChange={this.handleChange} value={product.total} size="1" style={{ textAlign: 'center' }}></input>
                                                 <input className="btn btn-success ml-2 " type="button" onClick={this.handleClick} value="+"></input>
                                             </div>
                                         }

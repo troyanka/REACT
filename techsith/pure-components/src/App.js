@@ -10,7 +10,7 @@ import './App.css';
     Don`t use pure component anyway, It is dangerous. If we have big state with nested components, Pure component does Shallow compare.
     Shallow compare just compares the objects, so referense. So current and previous state have to have same reference than it
     think that is hasnt change. But if you have a large tree, and something in the inner leaf will be changed shallo compare won`t
-    be aware of it. 
+    be aware of it. It wont render it and all the child components also won`t be rendered. 
 
 */}
 
