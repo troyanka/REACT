@@ -1,19 +1,18 @@
 import React, { Component, Fragment } from "react";
-import ProductItem from '../components/product-item';
+import ProductItem from "../components/product-item";
 import { products } from "../services/products.service";
-
-// 45 minute
 
 class App extends Component {
   state = {
     products: [],
-    totalAmount: 0
+    totalAmount: 0,
+    itemsInCart: []
   };
 
   componentDidMount() {
     let myProducts = [...products];
     myProducts.map(product => {
-      product.total = 1;
+      product.total = 0;
       product.showAmount = false;
       return product;
     });
@@ -22,22 +21,40 @@ class App extends Component {
 
   handleChange() {}
 
-  handleClick = (event, ProductId) => {
+  handleClick = (event, productId) => {
     let myProducts = [...products];
+    let myCounter = this.state.totalAmount;
     let op = event.target.value;
+    let itemsInCart = [...this.state.itemsInCart];
+    console.log("itemsInCart", itemsInCart);
 
     myProducts.map(product => {
-      if (product.id === ProductId) {
+      if (product.id === productId) {
         if (op === "+") {
           product.total++;
+          myCounter++
+          let alreadyExists = itemsInCart.find( item => item.productId === productId);
+          if(!alreadyExists){
+            itemsInCart.push({productId, amount:1});
+          }
+          else{
+            alreadyExists.amount++;
+          }
         } else {
-          if (product.total > 1) product.total--;
+          if (product.total > 0) {
+
+            
+            myCounter--;
+            product.total--;
+          }
         }
       }
       return product;
     });
 
+    this.setState({itemsInCart});
     this.setState({ products: myProducts });
+    this.setState({ totalAmount: myCounter });
   };
 
   handleShow = productId => {
@@ -53,14 +70,22 @@ class App extends Component {
     return (
       <Fragment>
         <div className='container'>
-        <div className="row">
-            <div className="col-12 mt-3">
-            <p>Total Items In Cart: {this.state.totalAmount}</p>
+          <div className='row'>
+            <div className='col-12 mt-3'>
+              <p>Total Items In Cart: {this.state.totalAmount}</p>
+              {
+                  this.state.totalAmount > 0 && 
+                    <ul>
+                        {this.state.itemsInCart.map(item=>{
+                            return <li key={item.productId}>ItemId: {item.productId} | Amount: {item.amount}</li>
+                        })}
+                  </ul>
+              }
             </div>
-        </div>
+          </div>
           <div className='row'>
             {products.map(product => (
-              <ProductItem key={product.id} product={product} clickShow={this.handleShow} handleChange={this.handleChange} handleClick={this.handleClick}/>
+              <ProductItem key={product.id} product={product} clickShow={this.handleShow} handleChange={this.handleChange} handleClick={this.handleClick} />
             ))}
           </div>
         </div>
