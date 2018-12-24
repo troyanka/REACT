@@ -1,6 +1,7 @@
-import React, { Component, Fragment } from "react";
-import ProductItem from "../components/product-item";
-import { products } from "../services/products.service";
+import React, { Component, Fragment } from 'react';
+import ProductItem from '../components/product-item';
+import TotalDisplay from '../components/totalDisplay'
+import { products } from '../services/products.service';
 
 class App extends Component {
   state = {
