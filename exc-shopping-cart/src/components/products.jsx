@@ -30,6 +30,7 @@ class App extends Component {
 
     myProducts.map(product => {
       if (product.id === productId) {
+          //Add to Total Amount + add specific product
         if (op === "+") {
           product.total++;
           myCounter++
@@ -40,12 +41,22 @@ class App extends Component {
           else{
             alreadyExists.amount++;
           }
+        
+        //Reduce from Total Amount + delete specific product
         } else {
           if (product.total > 0) {
-
-            
             myCounter--;
             product.total--;
+
+            let currentItem = itemsInCart.find( item => item.productId === productId);
+            
+            if(currentItem.amount === 1){
+                const removeIndex = itemsInCart.map(function(item) { return item.productId }).indexOf(productId);
+                itemsInCart.splice(removeIndex, 1);
+            }
+            else{
+                currentItem.amount--;
+            }
           }
         }
       }
