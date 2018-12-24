@@ -1,84 +1,72 @@
-import React, { Component, Fragment } from 'react';
-import {products} from '../services/products.service';
+import React, { Component, Fragment } from "react";
+import ProductItem from '../components/product-item';
+import { products } from "../services/products.service";
 
 // 45 minute
 
 class App extends Component {
-    state = {
-        total: 1,
-        showAmount: false,
-        products: []
-    }
+  state = {
+    products: [],
+    totalAmount: 0
+  };
 
-    componentDidMount(){
-        let myProducts = [...products];
-        myProducts.map( product =>{
-            product.showAmount = false;
-            product.total = 1;
-            return product;
-        });
-        this.setState({products:myProducts});
-    }
+  componentDidMount() {
+    let myProducts = [...products];
+    myProducts.map(product => {
+      product.total = 1;
+      product.showAmount = false;
+      return product;
+    });
+    this.setState({ products: myProducts });
+  }
 
-    handleChange() { };
+  handleChange() {}
 
-    handleClick = (event) => {
-        let total = this.state.total;
-        let op = event.target.value;
-        if (op === '+') total++;
-        else {
-            if (total > 1) {
-                total--;
-            }
+  handleClick = (event, ProductId) => {
+    let myProducts = [...products];
+    let op = event.target.value;
+
+    myProducts.map(product => {
+      if (product.id === ProductId) {
+        if (op === "+") {
+          product.total++;
+        } else {
+          if (product.total > 1) product.total--;
         }
-        this.setState({ total });
-    }
+      }
+      return product;
+    });
 
-    handleShow = (id) => {
-        let { products } = this.state;
+    this.setState({ products: myProducts });
+  };
 
-        products.map(product=>{
-            product.showAmount = !product.showAmount;
-        });
+  handleShow = productId => {
+    let { products } = this.state;
+    let myProd = products.find(product => product.id === productId);
+    myProd.showAmount = !myProd.showAmount;
+    this.setState({ products });
+  };
 
-        let { showAmount } = this.state;
-        showAmount = !showAmount;
-        this.setState({ showAmount });
-    }
+  render() {
+    let { products } = this.state;
 
-    render() {
-
-        let { products } = this.state;
-
-        return (
-            <Fragment>
-                <div className="container">
-                    <div className="row">
-                        {products.map(product =>
-                            <div className="col-md-4 mt-5">
-                                <div className="card">
-                                    <div className="card-header">
-                                        <h3>{product.title}</h3>
-                                    </div>
-                                    <div className="card-body">
-                                        <p> {product.article} </p>
-                                        <p><input onClick={()=>this.handleShow(product.id)} className="btn btn-primary" type="button" value="Buy" /></p>
-                                        {product.showAmount &&
-                                            <div className="amount">
-                                                <input className="btn btn-success mr-2" type="button" onClick={this.handleClick} value="-"></input>
-                                                <input type="text" onChange={this.handleChange} value={product.total} size="1" style={{ textAlign: 'center' }}></input>
-                                                <input className="btn btn-success ml-2 " type="button" onClick={this.handleClick} value="+"></input>
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </Fragment>
-        )
-    }
+    return (
+      <Fragment>
+        <div className='container'>
+        <div className="row">
+            <div className="col-12 mt-3">
+            <p>Total Items In Cart: {this.state.totalAmount}</p>
+            </div>
+        </div>
+          <div className='row'>
+            {products.map(product => (
+              <ProductItem key={product.id} product={product} clickShow={this.handleShow} handleChange={this.handleChange} handleClick={this.handleClick}/>
+            ))}
+          </div>
+        </div>
+      </Fragment>
+    );
+  }
 }
 
 export default App;
