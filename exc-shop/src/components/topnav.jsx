@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { Link, NavLink} from 'react-router-dom';
 
 class TopNav extends Component {
     state = {  }
     render() { 
         return(
         <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-        <a className="navbar-brand" href="#">Home</a>
+        <Link className="navbar-brand" to="/">Home</Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -13,13 +14,13 @@ class TopNav extends Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <a className="nav-link text-primary" href="#">About</a>
+              <NavLink className="nav-link text-primary" to="/about">About</NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-primary" href="#">Products</a>
+              <NavLink className="nav-link text-primary" to="/products">Products</NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-primary" href="#">Contact</a>
+              <NavLink className="nav-link text-primary" to="/contact">Contact</NavLink>
             </li>
           </ul>
         </div>
