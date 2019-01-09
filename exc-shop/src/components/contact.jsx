@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 
-// STOPED part less 5 2 26 min
 class Contact extends Component {
     state = {
         contactForm: {
@@ -22,13 +21,12 @@ class Contact extends Component {
         e.preventDefault();
         let valid = true;
         const emailRegexp = /^(?!.*\.\.)[\w.\-#!$%&'*+\/=?^_`{}|~]{1,35}@[\w.\-]+\.[a-zA-Z]{2,15}$/;
-        const phoneRegexp = /^0[2-9]\d{7,8}$/
+        const phoneRegexp = /^0[2-9]\d{7,8}$/;
         let { errors } = { ...this.state };
         errors = {
             name: '',
             email: '',
-            phone: '',
-            message: ''
+            phone: ''
         };
         let { name, email, phone } = this.state.contactForm;
 
@@ -48,7 +46,7 @@ class Contact extends Component {
         }
 
         if (!phoneRegexp.test(phone)) {
-            errors.email = "A valid phone number requered";
+            errors.phone = "A valid phone number requered";
             valid = false;
         }
 
@@ -70,7 +68,7 @@ class Contact extends Component {
     render() {
 
         const { name, email, phone, message } = this.state.contactForm;
-        const { name: errorName, email: errorEmail, phone: errorPhone, message: ErrorMessage } = this.state.errors;
+        const { name: errorName, email: errorEmail, phone: errorPhone } = this.state.errors;
 
         return (
             <Fragment>
@@ -83,25 +81,24 @@ class Contact extends Component {
                 <div className="row">
                     <div className="col-md-6" style={{ minHeight: '1200px' }}>
                         <form onSubmit={(e) => this.handleContact(e)} method='POST' noValidate="noValidate" autoComplete="off">
-                            <div>
+                            <div className="form-group">
                                 <label htmlFor="name"><span className='text-danger'>*</span> Name:</label>
                                 <input value={name} onChange={(e) => this.handleChangeContact(e)} className="form-control" type="text" name="name" id="name" />
                                 {errorName && <span className="text-danger">{errorName}</span>}
                             </div>
-                            <div>
+                            <div className="form-group">
                                 <label htmlFor="email"><span className='text-danger'>*</span> Email:</label>
                                 <input value={email} onChange={(e) => this.handleChangeContact(e)} className="form-control" type="email" name="email" id="email" />
                                 {errorEmail && <span className="text-danger">{errorEmail}</span>}
                             </div>
-                            <div>
+                            <div className="form-group">
                                 <label htmlFor="phone"><span className='text-danger'>*</span> Phone:</label>
                                 <input value={phone} onChange={(e) => this.handleChangeContact(e)} className="form-control" type="phone" name="phone" id="phone" />
                                 {errorPhone && <span className="text-danger">{errorPhone}</span>}
                             </div>
-                            <div>
+                            <div className="form-group">
                                 <label htmlFor="message">Message:</label>
                                 <textarea value={message} onChange={(e) => this.handleChangeContact(e)} className="form-control" type="phone" name="message" id="message" rows="10" />
-                                {ErrorMessage && <span className="text-danger">{ErrorMessage}</span>}
                             </div>
                             <input className="btn btn-primary" name="submit" type="submit" value="Contact Me " />
                         </form>

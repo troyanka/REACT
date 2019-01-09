@@ -22,6 +22,9 @@ class TopNav extends Component {
             <li className="nav-item">
               <NavLink className="nav-link text-primary" to="/contact">Contact</NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link text-primary" to="/signup">Sign Up</NavLink>
+            </li>
           </ul>
         </div>
       </nav>
