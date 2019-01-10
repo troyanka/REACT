@@ -22,17 +22,18 @@ class Signup extends Component {
         e.preventDefault();
 
         const signSchema = {
-            name: Joi.string().required().min(2).max(70),
-            email: Joi.string().required().email(),
-            password: Joi.string().required().min(6).max(20)
+            name: Joi.string().required().min(2).max(70).error(new Error('* Name is required')),
+            email: Joi.string().required().email().error(new Error('*A valid email is required')),
+            password: Joi.string().required().min(6).max(20).error(new Error('*A valid password is required'))
         }
 
         const { error, value } = Joi.validate(this.state.signupForm, signSchema);
 
         if (error) {
-            this.setState({ errorMessage: error.details[0].message });
+            //this.setState({ errorMessage: error.details[0].message });
+            this.setState({ errorMessage: error.message });
         } else {
-            //send data to the server
+            this.setState({ errorMessage: 'All right' });
         }
     }
 
