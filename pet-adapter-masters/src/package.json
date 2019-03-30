@@ -4,10 +4,11 @@
   "description": "",
   "main": "App.js",
   "dependencies": {
+    "@reach/router": "^1.2.1",
     "eslint-plugin-jsx-a11y": "^6.2.0",
     "petfinder-client": "0.0.3",
-    "react": "^16.8.3",
-    "react-dom": "^16.8.3"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
