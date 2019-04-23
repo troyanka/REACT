@@ -1,0 +1,19 @@
+{
+  "books": [
+    {
+      "title": "Book 6",
+      "rating": "4.5",
+      "id": 6
+    },
+    {
+      "title": "Book 8",
+      "rating": "3.9",
+      "id": 8
+    },
+    {
+      "title": "Book 9",
+      "rating": "5.0",
+      "id": 9
+    }
+  ]
+}
