@@ -1,0 +1,12 @@
+.main-nav{
+    display: flex;
+    flex-direction: row;
+
+    .logo{
+        width: 50px;
+    }
+    .nav-links{
+        display: flex;
+        list-style: none;
+    }
+}
