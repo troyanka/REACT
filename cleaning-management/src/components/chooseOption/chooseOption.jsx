@@ -1,27 +1,16 @@
 import React from "react";
 import "./chooseOption.scss";
+// import washFloorImg from '../../images/clean-floor.jpg';
+// import washDishesImg from './images/wash-dishes.jpg';
+
 
 const ChooseOptions = props => {
-  const { handleChoose } = props;
-  const CleaningOptions = [
-    {
-      id: 1,
-      title: "Clean the floor"
-    },
-    {
-      id: 1,
-      title: "Wash the bathroom"
-    }
-  ];
+  const {id, title, isChecked, imageUrl } = props;
 
   return (
-    <div>
-      <ul>
-        {CleaningOptions.map(option => {
-          <li onClick={() => handleChoose(option.id)}>{option.title}</li>;
-        })}
-      </ul>
-    </div>
+    <label><input type="radio" value={title} key={id} name="task-choose" checked={isChecked} className="form-check-input"/>
+    {title}</label>
+    
   );
 };
 
