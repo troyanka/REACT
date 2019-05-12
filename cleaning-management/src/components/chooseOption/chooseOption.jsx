@@ -5,12 +5,16 @@ import "./chooseOption.scss";
 
 
 const ChooseOptions = props => {
-  const {id, title, isChecked, imageUrl } = props;
+  const {id, title, isChecked, handleChoose, imageUrl } = props;
 
   return (
-    <label><input type="radio" value={title} key={id} name="task-choose" checked={isChecked} className="form-check-input"/>
-    {title}</label>
-    
+    <React.Fragment>
+    <label>
+      <input type="radio" value={title} key={id} name="task-choose" onChange={handleChoose} className="form-check-input"/>
+      {title}
+    </label>
+    <img src={imageUrl} alt={title}/>
+    </React.Fragment>
   );
 };
 

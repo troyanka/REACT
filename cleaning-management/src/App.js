@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.scss";
 import Navbar from "./components/navbar/Navbar";
 import ChooseOptions from "./components/chooseOption/chooseOption";
+import washFloorImg from "./images/clean-floor.jpg";
 
 
 class App extends Component {
@@ -13,21 +14,22 @@ class App extends Component {
     {
       id: 1,
       title: "Clean the floor",
-      isChecked: true
-      // imageUrl: washFloorImg
-    },
-    {
-      id: 2,
-      title: "Wash dishes",
-      isChecked: false
-      // imageUrl: washDishesImg
+      imageUrl: washFloorImg
     }
+    // {
+    //   id: 2,
+    //   title: "Wash dishes"
+    // },
+    // {
+    //   id: 3,
+    //   title: "Clean windows"
+    // }
   ];
 
-  // handleChoose = cleaningOptions => {
-  //   console.log(cleaningOptions);
-  //   this.setState({ userChosenOption: cleaningOptions });
-  // };
+  handleChoose = e => {
+    console.log("cleaningOptions", e.target.value);
+    this.setState({ userChosenOption: e.target.value });
+  };
 
   render() {
     return (
@@ -40,9 +42,10 @@ class App extends Component {
            handleChoose={this.handleChoose}
            id={option.id}
            title={option.title}
-           checked={option.isChecked}/>
+           isChecked={option.isChecked}
+           image={option.imageUrl}/>
         )}
-    </form>
+       </form>
         
         
         {this.state.userChosenOption && (
