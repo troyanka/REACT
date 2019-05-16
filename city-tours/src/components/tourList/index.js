@@ -5,7 +5,7 @@ import Tour from "../tour/tour";
 class TourList extends Component {
   render() {
     return (
-      <section>
+      <section className='tourList'>
         <Tour />
       </section>
     );

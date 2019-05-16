@@ -1,13 +1,10 @@
-@import './variables.scss';
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@import "./variables.scss";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-    background: $mainGray;
-    color: $mainGreen;
-    font-family: 'Shadows Into Light', cursive;
+body {
+  font-family: "Shadows Into Light", cursive;
 }
-
