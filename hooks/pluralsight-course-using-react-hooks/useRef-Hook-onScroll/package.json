@@ -2,7 +2,7 @@
   "name": "clip2-Setting-Up-Toolchain",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "ImageToggleOnMouseOver.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "next",
