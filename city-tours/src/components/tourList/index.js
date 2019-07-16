@@ -1,31 +1,23 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./tourList.scss";
 import Tour from "../tour/tour";
 import { tourData } from "../tourData";
 
-class TourList extends Component {
-  state = {
-    tours: tourData
-  };
+function TourList() {
+  const [tours, setTours] = useState(tourData);
 
-  removeTour = id => {
-    console.log(id);
-    const { tours } = this.state;
+  const removeTour = id => {
     let filteredTours = tours.filter(tour => tour.id !== id);
-    this.setState({ tours: filteredTours });
+    setTours(filteredTours);
   };
 
-  render() {
-    const { tours } = this.state;
-
-    return (
-      <section className='tourList'>
-        {tours.map(tour => (
-          <Tour key={tour.id} tourDetails={tour} removeTour={this.removeTour} />
-        ))}
-      </section>
-    );
-  }
+  return (
+    <section className='tourList'>
+      {tours.map(tour => (
+        <Tour key={tour.id} tourDetails={tour} removeTour={removeTour} />
+      ))}
+    </section>
+  );
 }
 
 export default TourList;
