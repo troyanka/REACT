@@ -43,8 +43,8 @@ class Search extends React.Component {
 
     axios
       .get(searchUrl, {
-        cancelToken: this.cancel.token,
-        crossdomain: true
+        // cancelToken: this.cancel.token,
+        headers: { "Access-Control-Allow-Origin": "*" }
       })
       .then(res => {
         const resultNotFoundMsg = !res.data.hits.length
