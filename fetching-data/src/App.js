@@ -1,23 +1,30 @@
-import React, { useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { tsConstructorType } from "@babel/types";
+// https://www.robinwieruch.de/react-fetching-data/ - stopped at How to fetch data with Axios in React
+import React, { Component } from "react";
+import FetchData from "./components/fetchData";
+import FetchWithAxios from "./components/fetchWithAxios";
+import FetchWithAsyncAwait from "./components/fetchWithAsyncAwait";
+import FetchInHigherOrderComponent from "./components/fetchInHigherOrderComponent";
 
-function App() {
-  const [data, setData] = useState({ hits: [] });
+const API = "https://hn.algolia.com/api/v1/search?query=";
+const DEFAULT_QUERY = "redux";
 
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-  
+    this.state = {};
+  }
 
-  return (
-    <ul>
-      {data.hits.map(item => {
-        <li key={item.objectID}>
-          <a href={item.url}>{item.title}</a>
-        </li>;
-      })}
-    </ul>
-  );
+  render() {
+    return (
+      <>
+        <FetchData />
+        <FetchWithAxios />
+        <FetchWithAsyncAwait />
+        <FetchInHigherOrderComponent />
+      </>
+    );
+  }
 }
 
 export default App;
