@@ -100,7 +100,7 @@ this.setState({persons})
               )
             }</div>)
 
-      style.backgroundColor = 'red';      
+      // style.backgroundColor = 'red';      
     }
 
     let classes = [];
