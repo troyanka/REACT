@@ -4,8 +4,9 @@ import React, {
 import "./App.css";
 //import Radium, {StyleRoot} from 'radium';
 // import styled from 'styled-components';
-import Person from "./Person/Person";
+import Persons from '../components/Persons/Persons'
 import classes from './App.css';
+import Cockpit from "../components/Cockpit/Cockpit";
 
 class app extends Component {
   state = {
@@ -66,70 +67,17 @@ class app extends Component {
   }
 
   render() {
-    // const style = {
-    //   backgroundColor: 'green',  
-    //   color: 'white',
-    //   font: 'inherit',
-    //   border: '1px solid blue',
-    //   padding: '8px',
-    //   cursor: 'pointer',
-
-
-    //   // To use it we have to add Radium
-    // //   ':hover': {
-    // //  backgroundColor: "lightcoral",
-    // //  color: 'black'
-    // //   }
-    // };
-
     let persons = null;
     let btnClasses = [classes.button]
 
     if (this.state.showPersons) {
-      persons = ( this.state.persons.map((person, index) =>{
-        return (
-          <div>
-          <Person key={person.id}
-            name={ person.name}
-            age={person.age }
-            changed={event => this.nameChangedHandler(event, person.id)}
-            click={() => this.deletePersonHandler(index)}/>
-            </div>
-          )
-        }
-      )
-         )
-
-        // style.backgroundColor = 'red';      
-      }
-
-
-      btnClasses.push(classes.red)
-
-      let assignedClasses = [];
-      if (this.state.persons.length <= 2) {
-        assignedClasses.push(classes.red); // classes = ['red']
-      }
-      if (this.state.persons.length <= 1) {
-        assignedClasses.push(classes.bold); // classes = ['red', 'bold']
-      }
-
-
+      persons = <Persons persons={this.state.persons} cliked={this.deletePersonHandler} changed={this.nameChangedHandler}/> }
 
 
       return (
-
-
         <div className={classes.app}>
-        <p className={assignedClasses.join(' ')}> This is really working </p> {
-          /* <StyledButton  alt={this.state.showPersons} onClick={this.togglePersonsHandler} >Toggle Persons</StyledButton> */ }
-          <button className={btnClasses.join(' ')} onClick = {this.togglePersonsHandler}> Toggle Persons </button>
-
-
-        {
-          persons
-        }
-
+          <Cockpit persons={this.state.persons} showPersons={this.state.showPersons} toggled={this.togglePersonsHandler}/>
+          {persons}
         </div>
 
       );
@@ -137,4 +85,3 @@ class app extends Component {
   }
 
   export default app;
-  // export default Radium(app);
