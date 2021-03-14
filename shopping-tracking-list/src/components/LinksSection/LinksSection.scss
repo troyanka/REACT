@@ -1,0 +1,22 @@
+.link-section {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-decoration: none;
+    margin-top: 20px;
+
+    .link-icon {
+        width: 30px;
+        border-radius: 50%;
+        border: 2px solid black;
+    }
+}
+
+.link-text {
+    color: #75a7ef;
+    margin-right: 5px;
+}
+
+> a {
+    text-decoration: none;
+}

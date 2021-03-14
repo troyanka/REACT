@@ -1,0 +1,13 @@
+header {
+    position: sticky;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #75a7ef;
+    z-index: 999;
+    padding: 10px;
+
+    .app-logo{
+        max-width: 120px;
+    }
+}

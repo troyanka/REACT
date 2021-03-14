@@ -1,0 +1,16 @@
+.main-container-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .action-img {
+        img {
+            max-width: 120px;
+            transition: transform .2s;
+
+            &:hover{
+                transform: scale(1.1);
+            }
+        }
+    }
+}
