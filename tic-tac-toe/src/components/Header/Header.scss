@@ -1,0 +1,11 @@
+@import "../../styles/colors.scss";
+
+header {
+    text-align: center;
+    background: $main-brand-color;
+    padding: 10px;
+
+    h2 {
+        margin: 0 auto 20px auto;
+    }
+}

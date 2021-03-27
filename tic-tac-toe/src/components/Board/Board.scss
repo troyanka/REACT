@@ -1,0 +1,43 @@
+@import "../../styles/colors.scss";
+@import "../../styles/resolutions.scss";
+
+$borders-design: 5px solid $main-brand-color;
+
+.board-container {
+    max-width: 65%;
+    margin: 0 auto;
+
+    @media (min-width: $screen-md) {
+		max-width: 55%;
+	}
+
+    @media (min-width: $screen-lg) {
+		max-width: 45%;
+	}
+
+    [class~="board-row"]:last-of-type .board-cell {
+        border-bottom: none;
+    }
+
+    .board-row {
+        display: flex;
+
+        [class~="board-cell"]:last-of-type {
+            border-right: none;
+        }
+    }
+
+    .board-cell {
+        border-bottom: $borders-design;
+        border-right: $borders-design;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 80%;
+            display: inline-block;
+        }
+    }
+}

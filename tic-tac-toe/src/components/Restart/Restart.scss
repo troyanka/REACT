@@ -1,0 +1,18 @@
+@import "../../styles/colors.scss";
+
+.restart-btn-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 10px;
+
+    .restart-btn {
+        background-color: $main-brand-color;
+        color: $white;
+        font-size: 20px;
+        border-radius: 48px;
+        padding: 10px 30px;
+        box-shadow: none;
+        border: none;
+    }
+}
