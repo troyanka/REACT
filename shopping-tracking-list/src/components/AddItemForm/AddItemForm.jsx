@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import './AddItemForm.scss';
-import { productAddClick } from '../../actions/shoppingListActions';
+import { productAdd } from '../../actions/shoppingListActions';
 import { CURRENCY_NAMES } from '../../constants/currencyNames';
 import { STORE_NAMES } from '../../constants/storeNames';
 import { Button } from '../Button/Button';
 
 export const AddItemForm = () => {
     const dispatch = useDispatch();
+    const classes = useStyles();
 
     const [name, setName] = useState();
     const [storeName, setStoreName] = useState(STORE_NAMES[0].displayName);
-    const [price, setPrice] = useState();
+    const [price, setPrice] = useState(0);
 
-    const curr = new Date();
-    const defaultDate = curr.toISOString().substr(0, 10); //Today date
+    const currentDate = new Date();
+    const defaultDate = currentDate.toISOString().substr(0, 10); //Today date
     const [deliveryDate, setDeliveryDate] = useState(defaultDate);
 
     const handleProductAdd = e => {
@@ -27,7 +28,7 @@ export const AddItemForm = () => {
             deliveryDate
         }
 
-        dispatch(productAddClick(newProd))
+        dispatch(productAdd(newProd))
     }
 
     const handlePriceChange = e => setPrice(parseFloat(e.target.value));
@@ -37,17 +38,18 @@ export const AddItemForm = () => {
     return (
         <section className="all-items-container">
             <h3>Please add new Item</h3>
-            <form onSubmit={handleProductAdd}>
+            <form onSubmit={handleProductAdd} className={classes.form} noValidate>
 
                 <div>
                     <label htmlFor="prod-name">Product name: </label>
-                    <input type="text" id="prod-name" name="name"
+                    <input type="text" id="prod-name" name="name" value={name}
                         onChange={handleProdNameChange} required />
                 </div>
 
                 <div>
                     <label htmlFor="store-name">Store name:</label>
                     <select id="store-name" name="storeName"
+                        value={storeName}
                         onChange={e => setStoreName(e.target.value)}>
                         {STORE_NAMES.map(store => <option key={store.value} value={store.value}>{store.displayName}</option>)}
                     </select>
@@ -56,6 +58,7 @@ export const AddItemForm = () => {
                 <div>
                     <label htmlFor="prod-price">Price ({CURRENCY_NAMES.USD}):</label>
                     <input type="number" id="prod-price" step="any" min={0} name="price"
+                        value={price}
                         onChange={handlePriceChange} required />
                 </div>
 
@@ -65,7 +68,6 @@ export const AddItemForm = () => {
                         onChange={handleDeliveryDateChange} />
                 </div>
 
-                {/* <input type='submit' value='Add' className='blue-btn' /> */}
                 <Button type='submit' text='Add' />
             </form>
         </section>

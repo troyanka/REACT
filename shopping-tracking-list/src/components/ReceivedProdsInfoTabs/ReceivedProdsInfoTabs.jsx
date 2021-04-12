@@ -3,12 +3,13 @@ import 'react-tabs/style/react-tabs.css';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { StoresList } from '../StoresList/StoresList';
 import { ProductsGrid } from '../ProductsGrid/ProductsGrid';
+import {AddItemForm} from '../AddItemForm/AddItemForm';
 
 const ReceivedProdsInfoTabs = () => {
 
   const receivedItems = useSelector(({ shoppingListReducer }) => shoppingListReducer.receivedItems);
   const receivedStoresData = useSelector(({ shoppingListReducer }) => shoppingListReducer.receivedStoresData);
-  const currencyRates = useSelector(({ shoppingListReducer }) => shoppingListReducer.currencyRates); 
+  const currencyRates = useSelector(({ shoppingListReducer }) => shoppingListReducer.currencyRates);
 
   return (
     <Tabs>
@@ -18,7 +19,7 @@ const ReceivedProdsInfoTabs = () => {
       </TabList>
 
       <TabPanel>
-        <ProductsGrid items={receivedItems} currencyRates={currencyRates}/>
+        <ProductsGrid items={receivedItems} currencyRates={currencyRates} />
       </TabPanel>
       <TabPanel>
         <StoresList storesData={receivedStoresData} />

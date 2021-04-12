@@ -1,18 +1,24 @@
 
 export const addStoreToData = (storesData, product) => {
-    let updatedStoresData = { ...storesData };
+    let updatedStoresData;
     const { storeName, price } = product;
 
-    if (updatedStoresData[storeName]) {
-        updatedStoresData[storeName] = {
-            totalSum: updatedStoresData[storeName].totalSum += price,
-            itemsCounter: updatedStoresData[storeName].itemsCounter + 1,
+    if (storesData?.hasOwnProperty(storeName)) {
+        updatedStoresData = {
+            ...storesData,
+            [storeName]: {
+                ...storesData[storeName],
+                totalSum: storesData[storeName].totalSum + price,
+                itemsCounter: storesData[storeName].itemsCounter + 1,
+            }
         }
     }
     else {
-        updatedStoresData[storeName] = {
-            totalSum: price,
-            itemsCounter: 1
+        updatedStoresData = {
+            [storeName]: {
+                totalSum: price,
+                itemsCounter: 1
+            }
         }
     }
 
@@ -20,16 +26,23 @@ export const addStoreToData = (storesData, product) => {
 }
 
 export const removeItemFromStoreData = (storesData, product) => {
-    let updatedStoresData = { ...storesData };
+    let updatedStoresData = {};
     const { storeName, price } = product;
 
-    if (updatedStoresData[storeName].itemsCounter > 1) {
-        updatedStoresData[storeName] = {
-            totalSum: updatedStoresData[storeName].totalSum -= price,
-            itemsCounter: updatedStoresData[storeName].itemsCounter - 1,
+    if (storesData[storeName]?.itemsCounter > 1) {
+        updatedStoresData = {
+            ...storesData,
+            [storeName]: {
+                ...storesData[storeName],
+                totalSum: storesData[storeName].totalSum - price,
+                itemsCounter: storesData[storeName].itemsCounter - 1,
+            }
         }
     }
     else {
+        updatedStoresData = {
+            ...storesData,
+        }
         delete updatedStoresData[storeName]
     }
 

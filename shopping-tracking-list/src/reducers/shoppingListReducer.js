@@ -1,4 +1,5 @@
-import { PRODUCT_ADD_CLICK, PRODUCT_RECEIVED, FETCH_CURRENCY_RATES_SUCCESS, FETCH_CURRENCY_RATES_FAILURE, GET_CURRENCY_DATA } from '../constants/actionTypes';
+import isequal from 'lodash.isequal';
+import { PRODUCT_ADD, PRODUCT_RECEIVED, FETCH_CURRENCY_RATES_SUCCESS, FETCH_CURRENCY_RATES_FAILURE, FETCH_CURRENCY_DATA_BEGIN } from '../constants/actionTypes';
 import { removeItemFromStoreData, sortItemsByDate, addStoreToData } from '../utilities/utilities';
 import { PRODUCT_STATUSES } from '../constants/productStatuses';
 
@@ -20,13 +21,13 @@ const initialState = {
 
 const shoppingListReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_CURRENCY_DATA: {
+        case FETCH_CURRENCY_DATA_BEGIN: {
             return {
                 ...state,
                 isLoading: true
             }
         }
-        case PRODUCT_ADD_CLICK: {
+        case PRODUCT_ADD: {
             const { newProd } = action;
             newProd.id = state.lastId++;
             newProd.status = PRODUCT_STATUSES.ON_WAY;
@@ -61,9 +62,12 @@ const shoppingListReducer = (state = initialState, action) => {
         case FETCH_CURRENCY_RATES_SUCCESS: {
             const { currencyData } = action;
 
-            const oldRates = JSON.stringify(state.currencyRates);
-            if (oldRates === JSON.stringify(currencyData)) {
-                return state
+            // Note: performance improvment
+            const oldRates = state.currencyRates;
+            const areResultsEqual = isequal(oldRates, currencyData);
+
+            if (areResultsEqual) {
+                return state;
             }
 
             return {

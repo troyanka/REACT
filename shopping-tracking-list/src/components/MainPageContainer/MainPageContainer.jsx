@@ -8,10 +8,10 @@ export const MainPageContainer = () => {
     return (
         <div className='main-container-wrapper'>
             <Link to="/list" className='action-img'>
-                <img src={addPicture} alt='Add New Item Picture' title='Add New Item Picture' />
+                <img src={addPicture} alt='Add New Item' title='Add New Item' />
             </Link>
             <Link to="/received" className='action-img'>
-                <img src={searchPicture} alt='Received Item Picture' title='Received Item Picture' />
+                <img src={searchPicture} alt='Received Item' title='Received Item' />
             </Link>
         </div>
     );

@@ -2,14 +2,14 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
 import reducer from './reducers';
 import App from './App';
 import { getCurrencyData } from '../src/actions/shoppingListActions';
-import shoppingListMiddleware from './middlewares/shoppingListMiddleware';
 
-const middleware = [shoppingListMiddleware];
+const middleware = [thunk];
 
 if (process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger());
@@ -21,7 +21,7 @@ const store = createStore(
 )
 
 store.dispatch(getCurrencyData());
-setInterval(() => store.dispatch(getCurrencyData()), 10000);
+//setInterval(() => store.dispatch(getCurrencyData()), 10000);
 
 render(
   <BrowserRouter>
