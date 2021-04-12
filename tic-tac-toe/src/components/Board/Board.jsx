@@ -4,6 +4,7 @@ import { useState } from 'react/cjs/react.development';
 import { XSign } from '../Signs/XSign';
 import { ZeroSign } from '../Signs/ZeroSign';
 import './Board.scss';
+import { PLAYING_SIGN } from '../../constants/consts';
 
 export const Board = ({ playingBoard = [], onCellClick }) => {
 
@@ -29,7 +30,7 @@ export const Board = ({ playingBoard = [], onCellClick }) => {
     }, [])
 
     return (
-        <div className={`board-container`}>
+        <div className='board-container'>
             {
                 playingBoard.map((row, rowIndex) => (
 
@@ -43,11 +44,11 @@ export const Board = ({ playingBoard = [], onCellClick }) => {
                                     style={{ 'height': cellsHeight }}
                                     className='board-cell'>
                                     {
-                                        colValue === 'o' &&
+                                        colValue === PLAYING_SIGN.ZERO_SIGN &&
                                         <ZeroSign />
                                     }
                                     {
-                                        colValue === 'x' &&
+                                        colValue === PLAYING_SIGN.X_SIGN &&
                                         <XSign />
                                     }
                                 </div>)

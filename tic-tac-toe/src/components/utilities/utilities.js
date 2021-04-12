@@ -18,8 +18,6 @@ export const buildBoard = boardDimension => {
     return board;
 }
 
-export const getCurrentSign = ({ signComponent }) => signComponent;
-
 const checkRows = board => {
     for (let row = 0; row < board.length; row++) {
         let candidateWinner = board[row][0];
@@ -98,17 +96,5 @@ export const checkIfWinner = board => {
         return -1
     }
 
-    const winFromRows = checkRows(board);
-    if (winFromRows) return true;
-
-    const winFromCols = checkCols(board);
-    if (winFromCols) return true;
-
-    const winFromMainSlant = checkMainSlant(board);
-    if (winFromMainSlant) return true;
-
-    const winFromSecondarySlant = checkSecondarySlant(board);
-    if (winFromSecondarySlant) return true;
-
-    return false;
+    return checkRows(board) || checkCols(board) || checkMainSlant(board) || checkSecondarySlant(board)
 }
