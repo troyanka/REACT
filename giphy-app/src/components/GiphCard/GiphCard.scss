@@ -1,0 +1,21 @@
+.card-giph {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    .card-thumbnail {
+        max-width: 100px;
+    }
+
+    .card-title {
+        text-align: center;
+        font-size: 16px;
+        padding: 0 10px;
+        text-transform: capitalize;
+    }
+
+    .card-date {
+        padding: 10px;
+    }
+}

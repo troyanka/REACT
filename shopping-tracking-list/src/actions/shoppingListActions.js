@@ -12,14 +12,14 @@ export const productReceived = id => ({
     id
 })
 
-// TODO: how to call it? FETCH_CURRENCY_DATA_BEGIN
-export const getCurrencyData_old = () => ({
+export const fetchCurrencyDataBegin = () => ({
     type: FETCH_CURRENCY_DATA_BEGIN
 });
 
 export function getCurrencyData() {
     return async function (dispatch, _getState) {
         try {
+            dispatch(fetchCurrencyDataBegin());
             const accessKey = '3e7eda3f7bd0b04d2b6faf8c3154692c';
             const symbolKeys = Object.keys(CURRENCY_NAMES);
             const symbols = symbolKeys.reduce((result, currentKey) => `${result},${CURRENCY_NAMES[currentKey]}`, '')

@@ -8,7 +8,6 @@ import { Button } from '../Button/Button';
 
 export const AddItemForm = () => {
     const dispatch = useDispatch();
-    const classes = useStyles();
 
     const [name, setName] = useState();
     const [storeName, setStoreName] = useState(STORE_NAMES[0].displayName);
@@ -38,7 +37,7 @@ export const AddItemForm = () => {
     return (
         <section className="all-items-container">
             <h3>Please add new Item</h3>
-            <form onSubmit={handleProductAdd} className={classes.form} noValidate>
+            <form onSubmit={handleProductAdd}>
 
                 <div>
                     <label htmlFor="prod-name">Product name: </label>
