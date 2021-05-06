@@ -1,5 +1,6 @@
 import { APP_INIT, ON_FETCH_GIPHS_SUCCESS, FETCH_DATA_BEGIN, ON_FETCH_FAILURE, SORT_BY_VALUE_CHANGE, ON_START_FETCH_GIPHS } from '../constants/actionTypes';
 import { getURLSearchParams } from '../utilities/utilities';
+import { URLParamNames } from '../constants/consts';
 
 const initialstate = {
     giphs: undefined,
@@ -13,13 +14,12 @@ const gihpyReducer = (state = initialstate, action) => {
     switch (action.type) {
         case APP_INIT: {
 
-            const URLparams = getURLSearchParams();
-            
+            const paramsFromURL = getURLSearchParams();
+
             return {
                 ...state,
-                // TODO: make consts + sort works when there is a value
-                sortValue: URLparams['sort-by'],
-                searchTerm: URLparams['search-value']
+                sortValue: paramsFromURL[URLParamNames.SORT_BY],
+                searchTerm: paramsFromURL[URLParamNames.SEARCH_VALUE]
             }
         }
         case ON_START_FETCH_GIPHS: {

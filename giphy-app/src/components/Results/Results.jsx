@@ -7,9 +7,7 @@ import { sortByField } from '../../utilities/utilities';
 const Results = () => {
     const giphs = useSelector(({ gihpyReducer }) => gihpyReducer.giphs) || [];
     const sortValue = useSelector(({ gihpyReducer }) => gihpyReducer.sortValue);
-
     const sortedGiphs = sortByField(giphs, sortValue);
-    console.log("sortedGiphs", sortedGiphs)
 
     return (
         <section className="results-wrapper">

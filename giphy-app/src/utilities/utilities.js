@@ -1,5 +1,4 @@
 export const buildURLSearchParamsByValue = (paramName, paramValue) => {
-    // TODO: add check if the value already exists
     const params = new URLSearchParams(window.location.hash.split("?")[1]);
 
     if (params.has(paramName)) {
@@ -27,7 +26,7 @@ export const sortByField = (results, sortValue) => {
     if (!sortValue) {
         return results;
     }
-
+    // TODO: check how to make in enums
     switch (sortValue) {
         case 'imported_date_asc': {
             return results?.sort((a, b) => new Date(a.import_datetime) > new Date(b.import_datetime) ? 1 : -1);
