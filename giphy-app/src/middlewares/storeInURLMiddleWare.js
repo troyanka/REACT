@@ -1,4 +1,4 @@
-import { FETCH_DATA_BEGIN, SORT_BY_VALUE_CHANGE } from '../constants/actionTypes';
+import { SET_SEARCH_VALUE, SORT_BY_VALUE_CHANGE } from '../constants/actionTypes';
 import { buildURLSearchParamsByValue } from '../utilities/utilities';
 
 const storeInURLMiddleWare = store => next => action => {
@@ -9,7 +9,7 @@ const storeInURLMiddleWare = store => next => action => {
             buildURLSearchParamsByValue('sort-by', action.payload);
             break;
         }
-        case FETCH_DATA_BEGIN: {
+        case SET_SEARCH_VALUE: {
             buildURLSearchParamsByValue('search-value', action.payload);
             break;
         }

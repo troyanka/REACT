@@ -1,4 +1,4 @@
-import { FETCH_DATA_BEGIN, APP_INIT, ON_FETCH_GIPHS_SUCCESS, ON_FETCH_FAILURE, SORT_BY_VALUE_CHANGE } from '../constants/actionTypes';
+import { FETCH_DATA_BEGIN, APP_INIT, SET_SEARCH_VALUE, ON_FETCH_GIPHS_SUCCESS, ON_FETCH_FAILURE, SORT_BY_VALUE_CHANGE } from '../constants/actionTypes';
 import axios from 'axios';
 
 export const appInit = () => {
@@ -7,12 +7,13 @@ export const appInit = () => {
     }
 }
 
-export const onStartFetch = searchValue => {
-    return async function (dispatch, _getState) {
+export const onStartFetch = () => {
+    return async function (dispatch, getState) {
         try {
-            dispatch(fetchDataBegin(searchValue));
+            const searchTerm  = getState().gihpyReducer.searchTerm;
+            dispatch(fetchDataBegin(searchTerm));
             const key = 'X3ufz4ilCYQih6AYzcc6EAoiYbkedprW';
-            const response = await axios.get(`https://api.giphy.com/v1/stickers/search?api_key=${key}&q=${searchValue}&limit=9&offset=0&lang=en`);
+            const response = await axios.get(`https://api.giphy.com/v1/stickers/search?api_key=${key}&q=${searchTerm}&limit=9&offset=0&lang=en`);
             dispatch(onFetchSuccess(response.data.data));
         }
         catch (error) {
@@ -21,10 +22,9 @@ export const onStartFetch = searchValue => {
     }
 }
 
-export const fetchDataBegin = sortValue => {
+export const fetchDataBegin = () => {
     return {
         type: FETCH_DATA_BEGIN,
-        payload: sortValue
     }
 }
 
@@ -46,5 +46,12 @@ export const onSortByValueChanged = sortValue => {
     return {
         type: SORT_BY_VALUE_CHANGE,
         payload: sortValue
+    }
+}
+
+export const setSearchValue = value => {
+    return {
+        type: SET_SEARCH_VALUE,
+        payload: value
     }
 }

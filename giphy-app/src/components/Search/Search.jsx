@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { onStartFetch } from '../../actions/actions';
+import { onStartFetch, setSearchValue} from '../../actions/actions';
 import { TextField } from '@material-ui/core';
 import debounce from 'lodash.debounce'
 
@@ -9,38 +9,35 @@ const Search = () => {
     const dispatch = useDispatch();
 
     const searchTerm = useSelector(({ gihpyReducer }) => gihpyReducer.searchTerm);
-    const [searchValue, setSearchValue] = useState();
 
     const updateSearchValue = () => {
         // A search query api call.
-        dispatch(onStartFetch(searchValue));
+        dispatch(onStartFetch());
     };
 
-    const delayedQuery = useCallback(debounce(updateSearchValue, 500), [searchValue]);
+    const delayedQuery = useCallback(debounce(updateSearchValue, 500), [searchTerm]);
 
+    //TODO: make custom hook
     useEffect(() => {
-        setSearchValue(searchTerm)
-    }, [searchTerm])
-
-    useEffect(() => {
-        if (searchValue) {
+        if (searchTerm) {
             delayedQuery();
         }
 
         // Cancel the debounce on useEffect cleanup.
         return delayedQuery.cancel;
-    }, [searchValue, delayedQuery]);
+        
+    }, [searchTerm, delayedQuery]);
 
     const handleInputValueChange = e => {
         const eventValue = e.target.value;
-        setSearchValue(eventValue);
+        dispatch(setSearchValue(eventValue));
     };
 
     return (
         <TextField
             placeholder="Search Term"
             type="text"
-            value={searchValue}
+            value={searchTerm}
             onChange={handleInputValueChange}
         />
     );

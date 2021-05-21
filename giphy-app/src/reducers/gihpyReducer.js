@@ -1,4 +1,4 @@
-import { APP_INIT, ON_FETCH_GIPHS_SUCCESS, FETCH_DATA_BEGIN, ON_FETCH_FAILURE, SORT_BY_VALUE_CHANGE, ON_START_FETCH_GIPHS } from '../constants/actionTypes';
+import { APP_INIT, ON_FETCH_GIPHS_SUCCESS, SET_SEARCH_VALUE, ON_FETCH_FAILURE, SORT_BY_VALUE_CHANGE, ON_START_FETCH_GIPHS } from '../constants/actionTypes';
 import { getURLSearchParams } from '../utilities/utilities';
 import { URLParamNames } from '../constants/consts';
 
@@ -53,12 +53,10 @@ const gihpyReducer = (state = initialstate, action) => {
                 sortValue: sortByValue
             }
         }
-        case FETCH_DATA_BEGIN: {
-            const searchTerm = action.payload;
-
+        case SET_SEARCH_VALUE: {
             return {
                 ...state,
-                searchTerm: searchTerm
+                searchTerm: action.payload
             }
         }
 
