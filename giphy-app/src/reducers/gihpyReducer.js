@@ -1,4 +1,4 @@
-import { APP_INIT, ON_FETCH_GIPHS_SUCCESS, SET_SEARCH_VALUE, ON_FETCH_FAILURE, SORT_BY_VALUE_CHANGE, ON_START_FETCH_GIPHS } from '../constants/actionTypes';
+import { SET_SHOW_DATES_TOGGLE, SET_SHOW_NAMES_TOGGLE, APP_INIT, ON_FETCH_GIPHS_SUCCESS, SET_SEARCH_VALUE, ON_FETCH_FAILURE, SORT_BY_VALUE_CHANGE, ON_START_FETCH_GIPHS } from '../constants/actionTypes';
 import { getURLSearchParams } from '../utilities/utilities';
 import { URLParamNames } from '../constants/consts';
 
@@ -8,6 +8,11 @@ const initialstate = {
     isError: '',
     sortValue: undefined,
     searchTerm: undefined,
+
+    viewState: {
+        showDates: true,
+        showNames: false
+    }
 };
 
 const gihpyReducer = (state = initialstate, action) => {
@@ -57,6 +62,24 @@ const gihpyReducer = (state = initialstate, action) => {
             return {
                 ...state,
                 searchTerm: action.payload
+            }
+        }
+        case SET_SHOW_DATES_TOGGLE: {
+            return {
+                ...state,
+                viewState: {
+                    ...state.viewState,
+                    showDates: action.payload
+                }
+            }
+        }
+        case SET_SHOW_NAMES_TOGGLE: {
+            return {
+                ...state,
+                viewState: {
+                    ...state.viewState,
+                    showNames: action.payload
+                }
             }
         }
 

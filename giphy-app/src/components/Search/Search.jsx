@@ -1,46 +1,40 @@
-import React, { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { onStartFetch, setSearchValue} from '../../actions/actions';
+import React, { useCallback } from "react";
+import { useSelector } from "react-redux";
 import { TextField } from '@material-ui/core';
-import debounce from 'lodash.debounce'
+import { useDispatch } from "react-redux";
+import { onFetchSuccess, onStartFetch, setSearchValue } from "../../actions/actions";
 
-//TODO: check how to make this code better
+const MemoizedTextField = React.memo(props => <TextField {...props} />);
+
 const Search = () => {
+    const searchTerm = useSelector(({ gihpyState }) => gihpyState.searchTerm);
     const dispatch = useDispatch();
 
-    const searchTerm = useSelector(({ gihpyReducer }) => gihpyReducer.searchTerm);
+    const search = async () => {
+        const key = 'X3ufz4ilCYQih6AYzcc6EAoiYbkedprW';
 
-    const updateSearchValue = () => {
-        // A search query api call.
         dispatch(onStartFetch());
-    };
+        const response = await fetch(`https://api.giphy.com/v1/stickers/search?api_key=${key}&q=${searchTerm}&limit=9&offset=0&lang=en`);
+        const data = await response.json();
+        dispatch(onFetchSuccess(data.data));
 
-    const delayedQuery = useCallback(debounce(updateSearchValue, 500), [searchTerm]);
+        // TODO: how to detect if the serch temp changed?
+        //console.log('vika', localValue === searchTerm);
+    }
 
-    //TODO: make custom hook
-    useEffect(() => {
-        if (searchTerm) {
-            delayedQuery();
-        }
-
-        // Cancel the debounce on useEffect cleanup.
-        return delayedQuery.cancel;
-        
-    }, [searchTerm, delayedQuery]);
-
-    const handleInputValueChange = e => {
-        const eventValue = e.target.value;
-        dispatch(setSearchValue(eventValue));
-    };
+    const onChange = useCallback(e => {
+        dispatch(setSearchValue(e.target.value));
+        search(); // TODO: here or inside useEffect?
+    }, [searchTerm])
 
     return (
-        <TextField
+        <MemoizedTextField
             placeholder="Search Term"
             type="text"
             value={searchTerm}
-            onChange={handleInputValueChange}
+            onChange={onChange}
         />
-    );
+    )
 }
 
 export default Search;

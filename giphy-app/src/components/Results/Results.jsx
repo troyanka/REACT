@@ -5,8 +5,8 @@ import './Results.scss';
 import { sortByField } from '../../utilities/utilities';
 
 const Results = () => {
-    const giphs = useSelector(({ gihpyReducer }) => gihpyReducer.giphs) || [];
-    const sortValue = useSelector(({ gihpyReducer }) => gihpyReducer.sortValue);
+    const giphs = useSelector(({ gihpyState }) => gihpyState.giphs) || [];
+    const sortValue = useSelector(({ gihpyState }) => gihpyState.sortValue);
     const sortedGiphs = sortByField(giphs, sortValue);
 
     return (

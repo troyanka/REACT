@@ -1,0 +1,16 @@
+.results-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 20px 0;
+    gap: 30px;
+
+    /* Small devices (portrait tablets and large phones, 600px and up) */
+    @media only screen and (min-width: 600px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (min-width: 768px) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

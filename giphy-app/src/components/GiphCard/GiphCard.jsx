@@ -4,21 +4,31 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { DateTime } from 'luxon';
 import './GiphCard.scss'
+import { useSelector } from 'react-redux';
 
 const GiphCard = ({ cardInfo }) => {
+    const { title, import_datetime, images } = cardInfo;
+    const { showDates, showNames } = useSelector(({ gihpyState }) => gihpyState.viewState);
 
     return (
         <Card >
             <CardContent className="card-giph">
-                <Typography variant="h1" component="h1" className='card-title'>
-                    {cardInfo.title}
-                </Typography>
 
-                <Typography variant="subtitle1" component="span" className='card-date'>
-                    {DateTime.fromSQL(cardInfo.import_datetime).toLocaleString(DateTime.DATE_SHORT)}
-                </Typography>
+                {
+                    showNames &&
+                    <Typography variant="h1" component="h1" className='card-title'>
+                        {title}
+                    </Typography>
+                }
 
-                <img src={cardInfo.images.preview_gif.url} className='card-thumbnail' />
+                {
+                    showDates &&
+                    <Typography variant="subtitle1" component="span" className='card-date'>
+                        {DateTime.fromSQL(import_datetime).toLocaleString(DateTime.DATE_SHORT)}
+                    </Typography>
+                }
+
+                <img src={images.preview_gif.url} className='card-thumbnail' />
             </CardContent>
         </Card>
     );
